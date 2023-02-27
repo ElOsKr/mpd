@@ -4,6 +4,7 @@ import Search from './pages/Search';
 import Favorites  from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
+import Navbar from './components/Navbar';
 function App() {
 
   const router = createBrowserRouter( createRoutesFromElements(
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <RouterProvider router={router}/>
     </>
   );
