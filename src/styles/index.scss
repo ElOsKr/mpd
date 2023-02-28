@@ -3,8 +3,9 @@
 $font-primary: 'Space Grotesk';
 $font-secondary: sans-serif;
 
-html{
-    font-family: $font-primary, $font-secondary;   
+:root{
+    font-family: $font-primary, $font-secondary;
+    color: white;
 }
 
 * { 
@@ -12,3 +13,24 @@ html{
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    min-width: 320px;
+}
+
+.App{
+    min-height: 100vh;
+    background-color: '#393E46';
+    display: flex;
+    flex-direction: column;
+}
+
+.footer{
+    margin-top: auto;
+
+    &__link{
+        color: white;
+    }
+}
+
+

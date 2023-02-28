@@ -5,6 +5,7 @@ import Favorites  from './pages/Favorites';
 import NotFound from './pages/NotFound';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 function App() {
 
   const router = createBrowserRouter( createRoutesFromElements(
@@ -18,10 +19,14 @@ function App() {
   ))
 
   return (
-    <>
+    <div 
+    className='App'
+    style={{backgroundColor: '#393E46'}}
+    >
       <Navbar />
       <RouterProvider router={router}/>
-    </>
+      <Footer />
+    </div>
   );
 }
 
