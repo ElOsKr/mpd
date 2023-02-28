@@ -25,6 +25,15 @@ body {
     flex-direction: column;
 }
 
+.nav-link{
+    text-decoration: none;
+    color: white;
+    &-active{
+        text-decoration: underline;
+        text-decoration-color: #00ADB5;
+    }
+}
+
 .footer{
     margin-top: auto;
 
