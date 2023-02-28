@@ -10,7 +10,10 @@ function Footer() {
             <Toolbar sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            background: "#222831"
+            background: "#222831",
+            paddingLeft: {xs : '24px'},
+            paddingRight: {xs : '24px'},
+            minHeight: {xs : '64px'}
             }}>
                 <Box sx={{
                     display: 'flex',

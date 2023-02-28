@@ -26,8 +26,9 @@ body {
   color: white;
 }
 .nav-link-active {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-color: #00ADB5;
+  text-decoration-thickness: 2px;
 }
 
 .footer {
