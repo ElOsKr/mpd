@@ -30,7 +30,7 @@ function Navbar() {
   }
 
   return (
-    <AppBar position="relative">
+    <AppBar position="fixed">
       <Toolbar 
         sx={{
           display: 'flex',
@@ -89,7 +89,7 @@ function Navbar() {
             <NavLink to={page.url}
             className= { ( { isActive}) => `nav-link ${isActive? 'nav-link-active': ''}`}
             key={page.url}
-            style={{marginTop: "3px", marginBottom: '3px'}}
+            style={{marginBottom: '10px'}}
           >
             {page.name}
           </NavLink>
