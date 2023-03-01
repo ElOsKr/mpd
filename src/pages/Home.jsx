@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom'
 const Container = styled(Grid)(() => ({
     justifyContent: "center",
     alignContent: "center", 
-    marginTop: '120px', 
+    marginTop: '120px',
+    marginBottom: '50px', 
     textAlign: 'center',
     height: '70vh'
 }));

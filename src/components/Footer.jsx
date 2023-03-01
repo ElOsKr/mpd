@@ -5,7 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Footer() {
   return (
-    <div className='footer'>
+    <Box className='footer'>
         <AppBar position='relative' >
             <Toolbar sx={{
             display: 'flex',
@@ -13,7 +13,8 @@ function Footer() {
             background: "#222831",
             paddingLeft: {xs : '24px'},
             paddingRight: {xs : '24px'},
-            minHeight: {xs : '64px'}
+            minHeight: {xs : '64px'},
+            zIndex: 10
             }}>
                 <Box sx={{
                     display: 'flex',
@@ -44,7 +45,7 @@ function Footer() {
                 </Box>
             </Toolbar>
         </AppBar>        
-    </div>
+    </Box>
 
   )
 }
