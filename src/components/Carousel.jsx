@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
@@ -7,7 +7,11 @@ import 'swiper/css/autoplay'
 import { EffectFade, Autoplay } from 'swiper'
 import '../styles/index.css'
 
-
+const CarouselBox = styled(Box)(() => ({
+    width: '70%',
+    height: '100%',
+    margin: '0 auto',
+}));
 
 function Carousel() {
 
@@ -21,13 +25,7 @@ function Carousel() {
 
     
   return (
-    <Box
-        sx={{
-            width: '70%',
-            height: '100%',
-            margin: '0 auto',
-        }}
-    >
+    <CarouselBox>
         <Swiper
             modules={[EffectFade, Autoplay]}
             effect
@@ -42,7 +40,7 @@ function Carousel() {
                 </SwiperSlide>
             )}
         </Swiper>
-    </Box>
+    </CarouselBox>
   )
 }
 

@@ -3,15 +3,8 @@ import { Grid, Typography, styled } from '@mui/material'
 import Carousel from '../components/Carousel'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
+import { MainBody } from '../components/MainBody'
 
-const Container = styled(Grid)(() => ({
-    justifyContent: "center",
-    alignContent: "center", 
-    marginTop: '120px',
-    marginBottom: '50px', 
-    textAlign: 'center',
-    height: '70vh'
-}));
 
 const Description = styled(Grid)(() => ({
   margin: 'auto 0'
@@ -27,7 +20,7 @@ const ButtonsContainer = styled(Grid)(() => ({
 }));
 
 const CarouselContainer = styled(Grid)(() => ({
-  height: '50%', 
+  height: '60%', 
   maxHeight: '500px',
   justifySelf: "center"
 }));
@@ -46,7 +39,9 @@ function Home() {
   }
 
   return (
-    <Container container spacing={2}>
+    <MainBody container spacing={2} sx={{
+      alignContent: {sm: "center"},
+    }}>
       <Description item md={6}>
         <Title variant="h5">
           Welcome to MPD, search, like and download images
@@ -59,7 +54,7 @@ function Home() {
       <CarouselContainer item xs={12} md={6}>
         <Carousel />
       </CarouselContainer>
-    </Container>
+    </MainBody>
   )
 }
 

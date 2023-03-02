@@ -7,7 +7,7 @@ const ColorButton = styled(MuiButton)(() => ({
     '&:hover': {
       backgroundColor: '#1D2126',
     },
-  }));
+}));
 
 function Button(props) {
   return (
