@@ -93,6 +93,7 @@ function Navbar() {
             className= { ( { isActive}) => `nav-link ${isActive? 'nav-link-active': ''}`}
             key={page.url}
             style={{marginBottom: '10px'}}
+            onClick={handleOpenMenu}
           >
             {page.name}
           </NavLink>
