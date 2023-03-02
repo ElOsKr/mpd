@@ -28,7 +28,7 @@ function Footer() {
                 </Box>
                 <Box>
                     <Typography sx={{
-                        fontSize: {xs: '10px', sm: '12px', md: '15px'}
+                        fontSize: {xs: '9px', sm: '12px', md: '15px'}
                         }}>
                             Created By: Óscar Alcivar</Typography>
                     <Box sx={{
