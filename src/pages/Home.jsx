@@ -41,6 +41,7 @@ function Home() {
   return (
     <MainBody container spacing={2} sx={{
       alignContent: {sm: "center"},
+      height: '70vh'
     }}>
       <Description item md={6}>
         <Title variant="h5">

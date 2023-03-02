@@ -6,24 +6,37 @@ import NotFound from './pages/NotFound';
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+
+const FONT = createTheme({
+  typography: {
+    allVariants: {
+      "fontFamily": 'Space Grotesk'
+    }
+  }
+})
+
 function App() {
 
   return (
-    <div 
-    className='App'
-    style={{backgroundColor: '#393E46'}}
-    >
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={ <Home/> }/>
-          <Route path = "/search" element = {<Search />}/>
-          <Route path = "/favorites" element = {<Favorites />}/>
-          <Route path='*' element ={<NotFound />} />           
-        </Routes>
-        <Footer />
-      </BrowserRouter> 
-    </div>
+    <ThemeProvider theme={FONT}>
+      <div 
+      className='App'
+      style={{backgroundColor: '#393E46'}}
+      >
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={ <Home/> }/>
+            <Route path = "/search" element = {<Search />}/>
+            <Route path = "/favorites" element = {<Favorites />}/>
+            <Route path='*' element ={<NotFound />} />           
+          </Routes>
+          <Footer />
+        </BrowserRouter> 
+      </div>      
+    </ThemeProvider>
   );
 }
 

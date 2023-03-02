@@ -36,6 +36,7 @@ function Input() {
     <InputText 
       label="Search"
       size="small"
+      sx={{width: { xs: '50%', md: '450px' }}}
     />
   )
 }

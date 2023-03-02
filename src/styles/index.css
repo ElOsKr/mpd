@@ -10,8 +10,13 @@
   box-sizing: border-box;
 }
 
-body {
-  min-width: 320px;
+::-webkit-scrollbar {
+  width: 3px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
 }
 
 .App {
