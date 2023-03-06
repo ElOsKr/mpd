@@ -38,6 +38,8 @@ function Card(photo) {
       width: img.width,
       height: img.height,
       urlSmall: img.urls.small,
+      urlFull: img.urls.full,
+      urlThumb: img.urls.thumb,
       likes: img.likes,
       dateAdded: actualDate.toLocaleString()
     }))
