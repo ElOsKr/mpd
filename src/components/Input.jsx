@@ -31,12 +31,18 @@ const InputText = styled(TextField)({
 });
 
 
-function Input() {
+function Input(props) {
+
+  const handleDescription = ()=>{
+
+  }
+
   return (
     <InputText 
       label="Search"
       size="small"
       sx={{width: { xs: '50%', md: '450px' }}}
+      onKeyUp={handleDescription}
     />
   )
 }

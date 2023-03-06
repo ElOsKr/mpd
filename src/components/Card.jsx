@@ -22,31 +22,30 @@ const CardContainer = styled(Grid)(() => ({
 
 function Card(photo) {
 
+  let img = photo.photo;
+
   return (
     <CardContainer item lg={3}>
-      <CardStyle sx={{ maxWidth: 345, width:'100%' }}>
+      <CardStyle sx={{width: {xs: 300, xl: 400}}}>
         <CardMedia
           component="img"
-          alt={photo.photo.description}
+          alt={img.description}
           height="350"
-          image={photo.photo.urls.small}
+          image={img.urls.small}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {photo.description}
-          </Typography>
           <Typography variant="overline">
             Photo By:
           </Typography>
           <UserBox container>
-            <Avatar src={`${photo.photo.user.profile_image.small}`}/>
+            <Avatar src={`${img.user.profile_image.small}`}/>
             <Typography variant='overline' sx={{alignSelf: 'center', marginLeft: '20px'}}>
-                {photo.photo.user.name}
+                {img.user.name}
             </Typography>        
           </UserBox>
         </CardContent>
         <CardActions sx={{justifyContent: 'end'}}>
-          {photo.photo.liked_by_user
+          {img.liked_by_user
             ? <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
             : <FavoriteBorderIcon sx={{cursor: 'pointer'}}/>
           }
