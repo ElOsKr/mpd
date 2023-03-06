@@ -1,5 +1,5 @@
-import React from 'react'
-import { Avatar, Card as CardMui, styled, Grid } from '@mui/material';
+import React, { useState } from 'react'
+import { Avatar, Card as CardMui, styled, Grid, IconButton, Snackbar, Alert } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import { useDispatch } from 'react-redux';
+import { addPhotoFavorites } from '../features/favorites/favoritesSlice';
 
 const UserBox = styled(Grid)(() => ({
     justifyContent: 'center'
@@ -22,7 +24,32 @@ const CardContainer = styled(Grid)(() => ({
 
 function Card(photo) {
 
+  const [alert, setAlert] = useState(false)
+
   let img = photo.photo;
+
+  const dispatch = useDispatch();
+
+  const actualDate = new Date();
+
+  const handleLike = () =>{
+    dispatch(addPhotoFavorites({
+      id: img.id,
+      width: img.width,
+      height: img.height,
+      urlSmall: img.urls.small,
+      likes: img.likes,
+      dateAdded: actualDate.toLocaleString()
+    }))
+    setAlert(true)
+  }
+
+  const handleClose = (event, reason) => {
+    if(reason === 'clickaway'){
+      return
+    }
+    setAlert(false)
+  }
 
   return (
     <CardContainer item lg={3}>
@@ -46,12 +73,27 @@ function Card(photo) {
         </CardContent>
         <CardActions sx={{justifyContent: 'end'}}>
           {img.liked_by_user
-            ? <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
-            : <FavoriteBorderIcon sx={{cursor: 'pointer'}}/>
+            ? <IconButton> 
+                <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
+              </IconButton> 
+            
+            : <IconButton onClick={handleLike}>
+                <FavoriteBorderIcon sx={{cursor: 'pointer'}}/>
+              </IconButton> 
+            
           }
           <CloudDownloadIcon sx={{cursor: 'pointer'}}/>
         </CardActions>
-      </CardStyle>      
+      </CardStyle>   
+      <Snackbar
+        open={alert}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }} variant="filled">
+          The image was saved successfully
+        </Alert>
+      </Snackbar>
     </CardContainer>
 
   )

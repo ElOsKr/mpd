@@ -7,6 +7,7 @@ const InputText = styled(TextField)({
 
   input:{
     color: 'white',
+    backgroundColor: 'none'
   },
 
   '& label':{
@@ -33,16 +34,13 @@ const InputText = styled(TextField)({
 
 function Input(props) {
 
-  const handleDescription = ()=>{
-
-  }
-
   return (
     <InputText 
       label="Search"
       size="small"
+      autoComplete='off'
       sx={{width: { xs: '50%', md: '450px' }}}
-      onKeyUp={handleDescription}
+      onChange={props.onChange}
     />
   )
 }

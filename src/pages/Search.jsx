@@ -30,15 +30,19 @@ function Search() {
 
   useEffect(()=>{
     dispatch(callApi(searchInput))
-  },[searchInput])
+  },[dispatch])
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    setSearchInput(event.target.value)
+    dispatch(callApi(searchInput))
   }
 
   const handleClickSearch = () => {
     dispatch(callApi(searchInput))
+  }
+
+  const handleChangeInput = (event) =>{
+    setSearchInput(event.target.value)
   }
 
 
@@ -47,7 +51,7 @@ function Search() {
       <SearchBox item xs={12}>
           <Typography variant="h5" sx={{mb: '20px'}}>Search</Typography>
         <form onSubmit={handleSubmit}>
-          <Input />
+          <Input onChange={handleChangeInput}/>
           <Button name="Search" onClick={handleClickSearch}/>          
         </form>
       </SearchBox>
