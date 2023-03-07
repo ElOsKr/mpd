@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/autoplay'
-import { EffectFade, Autoplay } from 'swiper'
+import SwiperCore, { EffectFade, Autoplay } from 'swiper'
 import '../styles/index.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { carouselCall } from '../features/carousel/carouselSlice'
@@ -16,6 +16,8 @@ const CarouselBox = styled(Box)(() => ({
 }));
 
 function Carousel() {
+
+    SwiperCore.use([Autoplay, EffectFade])
 
     const dispatch = useDispatch()
 
