@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Favorites  from './pages/Favorites';
 import NotFound from './pages/NotFound';
-import { Route, BrowserRouter, Routes} from 'react-router-dom';
+import { Route, HashRouter, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -25,7 +25,7 @@ function App() {
       className='App'
       style={{backgroundColor: '#393E46'}}
       >
-        <BrowserRouter>
+        <HashRouter>
           <Navbar />
           <Routes>
             <Route path="/" element={ <Home/> }/>
@@ -34,7 +34,7 @@ function App() {
             <Route path='*' element ={<NotFound />} />           
           </Routes>
           <Footer />
-        </BrowserRouter> 
+        </HashRouter> 
       </div>      
     </ThemeProvider>
   );
