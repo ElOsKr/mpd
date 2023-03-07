@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Card as CardMui, styled, Grid, IconButton, Snackbar, Alert } from '@mui/material';
+import { Avatar, Card as CardMui, styled, Grid, IconButton, Snackbar, Alert, Icon } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,6 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { useDispatch } from 'react-redux';
 import { addPhotoFavorites } from '../features/favorites/favoritesSlice';
+import { saveAs } from 'file-saver';
 
 const UserBox = styled(Grid)(() => ({
     justifyContent: 'center'
@@ -37,6 +38,8 @@ function Card(photo) {
       id: img.id,
       width: img.width,
       height: img.height,
+      title: img.title,
+      description: img.alt_description,
       urlSmall: img.urls.small,
       urlFull: img.urls.full,
       urlThumb: img.urls.thumb,
@@ -51,6 +54,10 @@ function Card(photo) {
       return
     }
     setAlert(false)
+  }
+
+  const handleDownload = () =>{
+    saveAs(img.urls.full, `${img.id}`)
   }
 
   return (
@@ -75,7 +82,7 @@ function Card(photo) {
         </CardContent>
         <CardActions sx={{justifyContent: 'end'}}>
           {img.liked_by_user
-            ? <IconButton> 
+            ? <IconButton color='black'> 
                 <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
               </IconButton> 
             
@@ -84,7 +91,9 @@ function Card(photo) {
               </IconButton> 
             
           }
-          <CloudDownloadIcon sx={{cursor: 'pointer'}}/>
+          <IconButton onClick={handleDownload}>
+            <CloudDownloadIcon sx={{cursor: 'pointer'}}/>
+          </IconButton>
         </CardActions>
       </CardStyle>   
       <Snackbar

@@ -30,7 +30,7 @@ function Search() {
 
   useEffect(()=>{
     dispatch(callApi(searchInput))
-  },[dispatch])
+  },[])
 
   const handleSubmit = (event) =>{
     event.preventDefault();

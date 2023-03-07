@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Box, styled } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -6,6 +6,8 @@ import 'swiper/css/effect-fade'
 import 'swiper/css/autoplay'
 import { EffectFade, Autoplay } from 'swiper'
 import '../styles/index.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { carouselCall } from '../features/carousel/carouselSlice'
 
 const CarouselBox = styled(Box)(() => ({
     width: '70%',
@@ -15,14 +17,13 @@ const CarouselBox = styled(Box)(() => ({
 
 function Carousel() {
 
-    const [photos] = useState([
-        "https://images.unsplash.com/photo-1664825557836-2e1f6e72ce99?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
-        "https://images.unsplash.com/photo-1664737426331-a1cde6c831d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=745&q=80",
-        "https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1337&q=80",
-        "https://images.unsplash.com/photo-1563889958749-625da26ed355?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        "https://images.unsplash.com/photo-1634225309345-b6b49528bcf4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-    ]);
+    const dispatch = useDispatch()
 
+    useEffect(()=>{
+        dispatch(carouselCall())
+    },[])
+
+    let photos = useSelector(state => state.carouselPhotos.photos)
     
   return (
     <CarouselBox>
@@ -35,8 +36,8 @@ function Carousel() {
             className='swiper'
         >
             {photos.map((photo) => 
-                <SwiperSlide className='swiper__img' key={photo}>
-                    <img src={`${photo}`} alt={`${photo}`}/>
+                <SwiperSlide className='swiper__img' key={photo.id}>
+                    <img src={`${photo.urls.regular}`} alt={`${photo.alt_description}`}/>
                 </SwiperSlide>
             )}
         </Swiper>

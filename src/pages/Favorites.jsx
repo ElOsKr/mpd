@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
 import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import CardFavorites from '../components/CardsFavorites';
+import { useSelector } from 'react-redux';
+import { filterFavoritesDescription } from '../features/favorites/favoritesSlice';
 
 const SearchBox = styled(Grid)(() => ({
   alignSelf: 'start'
@@ -42,16 +45,22 @@ function Favorites() {
 
   const [filter, setFilter] = useState('')
 
+  let photos = useSelector(state => state.favPhotos.favList)
+
 
   const handleChange = (event) => {
     setFilter(event.target.value)
+  }
+
+  const handleFilter = (event) => {
+    filterFavoritesDescription(event.target.value);
   }
 
   return (
     <MainBody container spacing={2}>
       <SearchBox item xs={12}>
           <Typography variant="h5" sx={{mb: '20px'}}>Favorites</Typography>
-        <Input />
+        <Input onChange={handleFilter}/>
           <FormControl size='small' sx={{minWidth: 120}}>
             <LabelStyle id="filter-label">Filter</LabelStyle>
             <SelectStyle
@@ -68,6 +77,9 @@ function Favorites() {
           </FormControl>
       </SearchBox>
       <CardsBox container item xs={12} spacing={4}> 
+        {photos.map((photo) => (
+            <CardFavorites photo={photo} key={photo.id}/>
+        ))}
       </CardsBox>
     </MainBody>
   )
