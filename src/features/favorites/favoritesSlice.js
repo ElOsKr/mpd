@@ -29,16 +29,6 @@ export const favoritesSlices = createSlice({
                 setInLocalStorage(state.favList)
         },
 
-        editPhotoDescription: (state,action) =>{
-            state.favList = state.favList.map((photo) => {
-                if(photo.id === action.payload.id){
-                    photo.description = action.payload.description;
-                }
-                return photo;
-            })
-            setInLocalStorage(state.favList)
-        },
-
         filterFavoritesDescription: (state,action) => {
             const filterDescription = action.payload;
             state.favList = JSON.parse(localStorage.getItem('favList')) || []
@@ -48,7 +38,17 @@ export const favoritesSlices = createSlice({
                     (photo) => photo.description && photo.description.toLowerCase().includes(filterDescription.toLowerCase())
                 )
             }
-        }
+        },
+
+        editPhotoDescription: (state,action) =>{
+            state.favList = state.favList.map((photo) => {
+                if(photo.id === action.payload.id){
+                    photo.description = action.payload.description;
+                }
+                return photo;
+            })
+            setInLocalStorage(state.favList)
+        },
     }
 })
 

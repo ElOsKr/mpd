@@ -3,7 +3,7 @@ import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
 import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import CardFavorites from '../components/CardsFavorites';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { filterFavoritesDescription } from '../features/favorites/favoritesSlice';
 
 const SearchBox = styled(Grid)(() => ({
@@ -45,6 +45,8 @@ function Favorites() {
 
   const [filter, setFilter] = useState('')
 
+  const dispatch = useDispatch();
+
   let photos = useSelector(state => state.favPhotos.favList)
 
 
@@ -53,7 +55,7 @@ function Favorites() {
   }
 
   const handleFilter = (event) => {
-    filterFavoritesDescription(event.target.value);
+    dispatch(filterFavoritesDescription(event.target.value));
   }
 
   return (

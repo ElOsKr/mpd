@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Grid, Typography, styled } from '@mui/material'
 import Carousel from '../components/Carousel'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { MainBody } from '../components/MainBody'
+import { useDispatch } from 'react-redux'
+import { carouselCall } from '../features/carousel/carouselSlice'
 
 
 const Description = styled(Grid)(() => ({
@@ -27,6 +29,12 @@ const CarouselContainer = styled(Grid)(() => ({
 
 
 function Home() {
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+      dispatch(carouselCall())
+  }, [])
 
   const navigate = useNavigate();
 

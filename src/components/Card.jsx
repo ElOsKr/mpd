@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import { useDispatch } from 'react-redux';
-import { addPhotoFavorites } from '../features/favorites/favoritesSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPhotoFavorites, removePhotoFavorite } from '../features/favorites/favoritesSlice';
 import { saveAs } from 'file-saver';
 
 const UserBox = styled(Grid)(() => ({
@@ -27,7 +27,11 @@ function Card(photo) {
 
   const [alert, setAlert] = useState(false)
 
+  let favoriteImages = useSelector((state) => state.favPhotos.favList)
+
   let img = photo.photo;
+
+  const isLiked = favoriteImages.some(imgSave => imgSave.id === img.id)
 
   const dispatch = useDispatch();
 
@@ -47,6 +51,10 @@ function Card(photo) {
       dateAdded: actualDate.toLocaleString()
     }))
     setAlert(true)
+  }
+
+  const handleDislike = () =>{
+    dispatch(removePhotoFavorite(img.id))
   }
 
   const handleClose = (event, reason) => {
@@ -81,8 +89,8 @@ function Card(photo) {
           </UserBox>
         </CardContent>
         <CardActions sx={{justifyContent: 'end'}}>
-          {img.liked_by_user
-            ? <IconButton color='black'> 
+          {isLiked
+            ? <IconButton color='black' onClick={handleDislike}> 
                 <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
               </IconButton> 
             
