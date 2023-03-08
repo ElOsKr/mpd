@@ -1,5 +1,7 @@
 import { Modal, Box, Typography, Card as CardMui, styled, CardContent, CardMedia, TextField, Button, CardActions } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { editPhotoDescription } from '../features/favorites/favoritesSlice';
 
 const CardStyle = styled(CardMui)(() => ({
     backgroundColor: '#00ADB5',
@@ -23,8 +25,20 @@ const style = {
     },
   }));
 
-function ModalDescription({open,img,description,handleClose}) {
+function ModalDescription({id, open,img,description,handleClose}) {
 
+    const [newDescription, setNewDescription] = useState('')
+
+    const dispatch = useDispatch();
+
+    const saveDescription = () => {
+        dispatch(editPhotoDescription(id , newDescription));
+        handleClose()
+    }
+
+    const handleChangeDescription = (event) => {
+        setNewDescription(event.target.value)
+    }   
 
   return (
     <div>
@@ -44,12 +58,18 @@ function ModalDescription({open,img,description,handleClose}) {
                 />
                 <CardContent sx={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
                     <Typography variant="Caption">
-                        {`Old description ${description}`}
+                        Old description:
                     </Typography>
-                    <TextField />               
+                    <Typography variant='subtitle2'>
+                        {description}
+                    </Typography>
+                    <Typography variant="Caption" sx={{mt: '10px'}}>
+                        New description:
+                    </Typography>
+                    <TextField onChange={handleChangeDescription}/>               
                 </CardContent>
-                <CardActions sx={{justifyContent: 'space-between'}}>
-                    <ColorButton variant='contained'>
+                <CardActions sx={{justifyContent: 'end'}}>
+                    <ColorButton variant='contained' onClick={saveDescription}>
                         Save description
                     </ColorButton>
                 </CardActions>

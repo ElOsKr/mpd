@@ -98,7 +98,7 @@ console.log(open)
             </Box>
         </CardActions>
       </CardStyle>
-      <ModalDescription open={open} img={img.urlFull} description={img.description} handleClose={handleClose}/>  
+      <ModalDescription id={img.id} open={open} img={img.urlSmall} description={img.description} handleClose={handleClose}/>  
     </CardContainer>
   )
 }

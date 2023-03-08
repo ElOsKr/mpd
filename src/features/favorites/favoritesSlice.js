@@ -43,7 +43,7 @@ export const favoritesSlices = createSlice({
         editPhotoDescription: (state,action) =>{
             state.favList = state.favList.map((photo) => {
                 if(photo.id === action.payload.id){
-                    photo.description = action.payload.description;
+                    return {...photo, description: action.payload.newDescription}
                 }
                 return photo;
             })
