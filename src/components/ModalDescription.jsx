@@ -74,7 +74,7 @@ function ModalDescription({id, open,img,description,handleClose}) {
                         Old description:
                     </Typography>
                     {description?
-                      <Typography variant='subtitle2'>
+                      <Typography variant='subtitle2' sx={{maxWidth: '268px', wordBreak:'break-word'}}>
                           {description}
                       </Typography> 
                       :
@@ -86,7 +86,7 @@ function ModalDescription({id, open,img,description,handleClose}) {
                     <Typography variant="Caption" sx={{mt: '10px'}}>
                         New description:
                     </Typography>
-                    <TextField onChange={handleChangeDescription}/>               
+                    <TextField onChange={handleChangeDescription} InputProps={{inputProps: {maxLength: 100}}}/>               
                 </CardContent>
                 <CardActions sx={{justifyContent: 'end'}}>
                     <ColorButton variant='contained' onClick={saveDescription}>
