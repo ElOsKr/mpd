@@ -1,4 +1,4 @@
-import { Modal, Box, Typography, Card as CardMui, styled, CardContent, CardMedia, TextField, Button, CardActions } from '@mui/material'
+import { Modal, Box, Typography, Card as CardMui, styled, CardContent, CardMedia, TextField, Button, CardActions, Snackbar, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { editPhotoDescription } from '../features/favorites/favoritesSlice';
@@ -29,16 +29,29 @@ function ModalDescription({id, open,img,description,handleClose}) {
 
     const [newDescription, setNewDescription] = useState('')
 
+    const [alert, setAlert] = useState(false)
+
     const dispatch = useDispatch();
 
     const saveDescription = () => {
-        dispatch(editPhotoDescription(id , newDescription));
-        handleClose()
+      if(newDescription===""){
+        setAlert(true)
+      }else{
+          dispatch(editPhotoDescription({id , newDescription}));
+          handleClose()        
+      }
     }
 
     const handleChangeDescription = (event) => {
         setNewDescription(event.target.value)
-    }   
+    }  
+    
+    const handleCloseAlert = (event, reason) => {
+      if(reason === 'clickaway'){
+        return
+      }
+      setAlert(false)
+    }
 
   return (
     <div>
@@ -60,9 +73,16 @@ function ModalDescription({id, open,img,description,handleClose}) {
                     <Typography variant="Caption">
                         Old description:
                     </Typography>
-                    <Typography variant='subtitle2'>
-                        {description}
-                    </Typography>
+                    {description?
+                      <Typography variant='subtitle2'>
+                          {description}
+                      </Typography> 
+                      :
+                      <Typography variant='subtitle2' sx={{color: 'grey'}}>
+                        No description
+                      </Typography>                    
+                  }
+
                     <Typography variant="Caption" sx={{mt: '10px'}}>
                         New description:
                     </Typography>
@@ -76,6 +96,15 @@ function ModalDescription({id, open,img,description,handleClose}) {
         </CardStyle>
         </Box>
       </Modal>
+      <Snackbar
+        open={alert}
+        autoHideDuration={2000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="error" sx={{ width: '100%' }} variant="filled">
+          Description can not be empty
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

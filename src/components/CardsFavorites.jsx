@@ -56,7 +56,6 @@ function CardFavorites(photo) {
     setOpen(false)
   }
 
-console.log(open)
   return (
     <CardContainer item lg={3}>
       <CardStyle sx={{width: {xs: 300, xl: 400}, height: 610}}>
@@ -80,9 +79,16 @@ console.log(open)
                 {`Likes: ${img.width} `}
                 <FavoriteIcon sx={{color:'red'}}/>
             </Typography>
-            <Typography variant="Caption" sx={{textAlign: 'start'}}>
-                {`Description: ${img.description}`}
-            </Typography>                        
+            {img.description?
+              <Typography variant="Caption" sx={{textAlign: 'start'}}>
+                  {`Description: ${img.description}`}
+              </Typography>
+              :
+              <Typography variant="Overline" sx={{textAlign: 'start', color: 'grey'}}>
+                No description available
+              </Typography>        
+            }
+                       
         </CardContent>
         <CardActions sx={{justifyContent: 'space-between'}}>
             <ColorButton variant='contained' onClick={openModal}>

@@ -49,6 +49,23 @@ export const favoritesSlices = createSlice({
             })
             setInLocalStorage(state.favList)
         },
+
+        orderPhotosBy: (state,action) => {
+            switch (action.payload){
+                case 'Width':
+                    state.favList = state.favList.sort((a, b) => b.width - a.width);
+                    break;
+                case 'Height':
+                    state.favList = state.favList.sort((a, b) => b.height - a.height);
+                    break;
+                case 'Likes':
+                    state.favList = state.favList.sort((a, b) => b.likes - a.likes);
+                    break;
+                default:
+                    state.favList = JSON.parse(localStorage.getItem('favList'));
+                    break;
+            }
+        }
     }
 })
 
@@ -57,6 +74,7 @@ export default favoritesSlices.reducer;
 export const { 
     addPhotoFavorites, 
     removePhotoFavorite, 
-    editPhotoDescription, 
-    filterFavoritesDescription 
+    filterFavoritesDescription,
+    editPhotoDescription,
+    orderPhotosBy
 } = favoritesSlices.actions

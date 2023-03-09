@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
 import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import CardFavorites from '../components/CardsFavorites';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterFavoritesDescription } from '../features/favorites/favoritesSlice';
+import { filterFavoritesDescription, orderPhotosBy } from '../features/favorites/favoritesSlice';
 
 const SearchBox = styled(Grid)(() => ({
   alignSelf: 'start'
@@ -43,15 +43,19 @@ const LabelStyle = styled(InputLabel)(() => ({
 
 function Favorites() {
 
-  const [filter, setFilter] = useState('')
+  const [value, setValue] = useState('')
 
   const dispatch = useDispatch();
 
   let photos = useSelector(state => state.favPhotos.favList)
 
 
+  useEffect(()=>{
+    dispatch(orderPhotosBy(value))
+  },[value])
+
   const handleChange = (event) => {
-    setFilter(event.target.value)
+    setValue(event.target.value)
   }
 
   const handleFilter = (event) => {
@@ -67,8 +71,8 @@ function Favorites() {
             <LabelStyle id="filter-label">Filter</LabelStyle>
             <SelectStyle
               labelId="filter-label"
-              value={filter}
               label="filter"
+              value={value}
               onChange={handleChange}
             >
               <MenuItem value='Added'>Added</MenuItem>
