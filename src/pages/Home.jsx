@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography, styled } from '@mui/material'
+import { Grid, Typography, styled, CircularProgress } from '@mui/material'
 import Carousel from '../components/Carousel'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { MainBody } from '../components/MainBody'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { carouselCall } from '../features/carousel/carouselSlice'
 
 
@@ -29,6 +29,8 @@ const CarouselContainer = styled(Grid)(() => ({
 
 
 function Home() {
+
+  let isLoading = useSelector(state=> state.carouselPhotos.isLoading);
 
   const dispatch = useDispatch();
 
@@ -61,7 +63,13 @@ function Home() {
         </ButtonsContainer>
       </Description>
       <CarouselContainer item xs={12} md={6}>
-        <Carousel />
+        {isLoading?
+          <Typography variant='h6'>
+            Loading...
+          </Typography>
+          :
+          <Carousel />
+        }
       </CarouselContainer>
     </MainBody>
   )

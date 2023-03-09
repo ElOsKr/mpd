@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import { useDispatch, useSelector } from 'react-redux'
 import { callApi } from '../features/search/searchSlice';
+import CardLoading from '../components/CardLoading';
 
 
 const SearchBox = styled(Grid)(() => ({
@@ -25,8 +26,15 @@ function Search() {
 
   let photos = useSelector(state => state.searchImg.photos)
 
+  const isLoading = useSelector(state => state.searchImg.isLoading)
+
   const dispatch = useDispatch();
 
+  let cardsLoading = [];
+
+  cardsLoading.forEach((index) => {
+    cardsLoading.push(<CardLoading key={index}/>)
+  })
 
   useEffect(()=>{
     dispatch(callApi(searchInput))
@@ -45,6 +53,7 @@ function Search() {
     setSearchInput(event.target.value)
   }
 
+  console.log(isLoading)
 
   return (
     <MainBody container spacing={2}>
@@ -56,9 +65,15 @@ function Search() {
         </form>
       </SearchBox>
       <CardsBox container item xs={12} spacing={4}> 
-        {photos.map((photo) => (
+        {isLoading?
+          [...Array(30).keys()].map((key) => (
+            <CardLoading key={key}/>
+          ))
+        :
+        photos.map((photo) => (
           <Card photo={photo} key={photo.id}/>
-        ))}
+        ))
+        }
       </CardsBox>
     </MainBody>
   )
