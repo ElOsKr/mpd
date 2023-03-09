@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch } from 'react-redux';
-import { removePhotoFavorite } from '../features/favorites/favoritesSlice';
+import { filterFavoritesDescription, removePhotoFavorite } from '../features/favorites/favoritesSlice';
 import { saveAs } from 'file-saver'
 import ModalDescription from './ModalDescription';
 
@@ -32,7 +32,7 @@ const CardContainer = styled(Grid)(() => ({
   margin: '10px 20px',
 }));
 
-function CardFavorites(photo) {
+function CardFavorites(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -40,12 +40,16 @@ function CardFavorites(photo) {
     setOpen(true)
   }
 
-  let img = photo.photo;
+  let img = props.photo;
+
+  let filterDescription = props.valueInput;
 
   const dispatch = useDispatch()
 
   const handleRemove = () => {
     dispatch(removePhotoFavorite(img.id))
+    dispatch(filterFavoritesDescription(filterDescription))
+
   }
 
   const handleDownload = () =>{
@@ -76,11 +80,11 @@ function CardFavorites(photo) {
                 {`Added: ${img.dateAdded}`}
             </Typography>
             <Typography variant="Caption" sx={{display: 'flex', justifyContent:'center'}}>
-                {`Likes: ${img.width} `}
+                {`Likes: ${img.likes} `}
                 <FavoriteIcon sx={{color:'red'}}/>
             </Typography>
             {img.description?
-              <Typography variant="Caption" sx={{textAlign: 'start'}}>
+              <Typography variant="Caption" sx={{textAlign: 'start', overflow:"hidden" , textOverflow:"ellipsis", maxWidth: '268px'}}>
                   {`Description: ${img.description}`}
               </Typography>
               :

@@ -23,7 +23,8 @@ export const favoritesSlices = createSlice({
         },
 
         removePhotoFavorite: (state,action) => {
-            state.favList = state.favList.filter(
+            state.favList = JSON.parse(localStorage.getItem('favList')) || []
+            state.favList = [...state.favList].filter(
                 (photo) => photo.id !== action.payload
             )
                 setInLocalStorage(state.favList)

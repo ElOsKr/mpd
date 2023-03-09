@@ -45,6 +45,8 @@ function Favorites() {
 
   const [value, setValue] = useState('')
 
+  const [valueInput, setValueInput] = useState('')
+
   const dispatch = useDispatch();
 
   let photos = useSelector(state => state.favPhotos.favList)
@@ -59,7 +61,11 @@ function Favorites() {
   }
 
   const handleFilter = (event) => {
+    setValueInput(event.target.value)
     dispatch(filterFavoritesDescription(event.target.value));
+    if(event.target.value===""){
+      setValue('')
+    }
   }
 
   return (
@@ -84,7 +90,7 @@ function Favorites() {
       </SearchBox>
       <CardsBox container item xs={12} spacing={4}> 
         {photos.map((photo) => (
-            <CardFavorites photo={photo} key={photo.id}/>
+            <CardFavorites photo={photo} key={photo.id} valueInput={valueInput}/>
         ))}
       </CardsBox>
     </MainBody>
