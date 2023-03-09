@@ -5,12 +5,16 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Footer() {
   return (
-    <div className='footer'>
+    <Box className='footer'>
         <AppBar position='relative' >
             <Toolbar sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            background: "#222831"
+            background: "#222831",
+            paddingLeft: {xs : '24px'},
+            paddingRight: {xs : '24px'},
+            minHeight: {xs : '64px'},
+            zIndex: 10
             }}>
                 <Box sx={{
                     display: 'flex',
@@ -24,7 +28,7 @@ function Footer() {
                 </Box>
                 <Box>
                     <Typography sx={{
-                        fontSize: {xs: '10px', sm: '12px', md: '15px'}
+                        fontSize: {xs: '9px', sm: '12px', md: '15px'}
                         }}>
                             Created By: Óscar Alcivar</Typography>
                     <Box sx={{
@@ -41,7 +45,7 @@ function Footer() {
                 </Box>
             </Toolbar>
         </AppBar>        
-    </div>
+    </Box>
 
   )
 }

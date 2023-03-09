@@ -1,8 +1,11 @@
 import React from 'react'
+import { MainBody } from '../components/MainBody'
 
 function NotFound() {
   return (
-    <div>NotFound</div>
+    <MainBody>
+      Not Found
+    </MainBody>
   )
 }
 
