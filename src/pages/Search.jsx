@@ -20,6 +20,8 @@ const CardsBox = styled(Grid)(() => ({
 
 const PaginationStyled = styled(Pagination)(() => ({
 
+  marginTop: '20px',
+
   '& .MuiPaginationItem-text': {
     color: 'white',
     
@@ -31,13 +33,14 @@ const PaginationStyled = styled(Pagination)(() => ({
 
   '& .Mui-selected': {
     color: 'black',
-    backgroundColor: 'white'
+    backgroundColor: 'white!important'
   }
 }))
 
 
 function Search() {
 
+  const [page,setPage] = useState(1)
 
   const [searchInput, setSearchInput] = useState('');
 
@@ -54,20 +57,30 @@ function Search() {
   })
 
   useEffect(()=>{
-    dispatch(callApi(searchInput))
+    dispatch(callApi(searchInput,page))
   },[])
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    dispatch(callApi(searchInput))
+    setPage(1)
+    dispatch(callApi(searchInput,page))
+    setSearchInput('')
   }
 
   const handleClickSearch = () => {
-    dispatch(callApi(searchInput))
+    setPage(1)
+    dispatch(callApi(searchInput,page))
+    setSearchInput('')
   }
 
   const handleChangeInput = (event) =>{
     setSearchInput(event.target.value)
+  }
+
+  const handleChangePage = (event , value) => {
+    setPage(value)
+    dispatch(callApi(searchInput,value))
+    window.scrollTo({top: 0})
   }
 
   return (
@@ -75,7 +88,7 @@ function Search() {
       <SearchBox item xs={12}>
           <Typography variant="h5" sx={{mb: '20px'}}>Search</Typography>
         <form onSubmit={handleSubmit}>
-          <Input onChange={handleChangeInput}/>
+          <Input onChange={handleChangeInput} value={searchInput}/>
           <Button name="Search" onClick={handleClickSearch}/>          
         </form>
       </SearchBox>
@@ -90,7 +103,7 @@ function Search() {
         ))
         }
       </CardsBox>
-      <PaginationStyled count={10} shape="rounded" size="small" sx={{mt: '20px'}}/>
+      <PaginationStyled count={10} page={page} shape="rounded" size="small" onChange={handleChangePage}/>
     </MainBody>
   )
 }

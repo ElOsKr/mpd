@@ -41,6 +41,7 @@ function Input(props) {
       autoComplete='off'
       sx={{width: { xs: '50%', md: '450px' }}}
       onChange={props.onChange}
+      value={props.value}
     />
   )
 }
