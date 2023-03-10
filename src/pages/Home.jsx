@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography, styled, CircularProgress } from '@mui/material'
+import { Grid, Typography, styled, CircularProgress, Skeleton } from '@mui/material'
 import Carousel from '../components/Carousel'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
@@ -64,9 +64,16 @@ function Home() {
       </Description>
       <CarouselContainer item xs={12} md={6}>
         {isLoading?
-          <Typography variant='h6'>
-            Loading...
-          </Typography>
+          <Skeleton
+            animation="wave"
+            variant="rectangular"
+            sx={{
+              width: '70%',
+              height: '100%',
+              margin: '0 auto',
+              borderRadius: '20px'
+            }}
+            />
           :
           <Carousel />
         }

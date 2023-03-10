@@ -26,7 +26,6 @@ export const searchSlice = createSlice({
             state.isLoading = false;
             state.hasError = false;
             state.photos = action.payload;
-            console.log("Fulfilled"+ state.isLoading)
         },
         [callApi.rejected]: (state, action) => {
             state.isLoading = false;

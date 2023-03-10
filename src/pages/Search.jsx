@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
-import { Grid, Typography, styled } from '@mui/material'
+import { Grid, Typography, styled, Pagination } from '@mui/material'
 import Button from '../components/Button';
 import Card from '../components/Card';
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +17,23 @@ const CardsBox = styled(Grid)(() => ({
   alignContent: 'start',
   justifyContent: 'center',
 }));
+
+const PaginationStyled = styled(Pagination)(() => ({
+
+  '& .MuiPaginationItem-text': {
+    color: 'white',
+    
+    '&:hover':{
+      color: 'black',
+      backgroundColor: 'white'
+    },
+  },
+
+  '& .Mui-selected': {
+    color: 'black',
+    backgroundColor: 'white'
+  }
+}))
 
 
 function Search() {
@@ -53,8 +70,6 @@ function Search() {
     setSearchInput(event.target.value)
   }
 
-  console.log(isLoading)
-
   return (
     <MainBody container spacing={2}>
       <SearchBox item xs={12}>
@@ -75,6 +90,7 @@ function Search() {
         ))
         }
       </CardsBox>
+      <PaginationStyled count={10} shape="rounded" size="small" sx={{mt: '20px'}}/>
     </MainBody>
   )
 }
