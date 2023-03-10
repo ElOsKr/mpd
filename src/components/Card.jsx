@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
-import { Avatar, Card as CardMui, styled, Grid, IconButton, Snackbar, Alert, Icon } from '@mui/material';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+        Avatar,
+        Card as CardMui, 
+        styled, 
+        Grid, 
+        IconButton, 
+        Snackbar, 
+        Alert, 
+        CardActions, 
+        CardContent, 
+        CardMedia, 
+        Typography } 
+from '@mui/material';
+import {
+        Favorite,
+        FavoriteBorder,
+        CloudDownload } 
+from '@mui/icons-material';
 import { addPhotoFavorites, removePhotoFavorite } from '../features/favorites/favoritesSlice';
 import { saveAs } from 'file-saver';
 
@@ -25,16 +35,22 @@ const CardContainer = styled(Grid)(() => ({
 
 function Card(photo) {
 
-  const [alert, setAlert] = useState(false)
+  const [alert, setAlert] = useState(false);
 
-  let favoriteImages = useSelector((state) => state.favPhotos.favList)
-
-  let img = photo.photo;
-
-  const isLiked = favoriteImages.some(imgSave => imgSave.id === img.id)
+  const [isLiked, setIsLiked] = useState(false);
 
   const dispatch = useDispatch();
 
+  let favoriteImages = useSelector((state) => state.favPhotos.favList);
+
+  useEffect(()=>{
+    if(favoriteImages!==null){
+      setIsLiked(favoriteImages.some(imgSave => imgSave.id === img.id));
+    }    
+  },[]);
+
+  let img = photo.photo;
+  
   const actualDate = new Date();
 
   const handleLike = () =>{
@@ -49,24 +65,26 @@ function Card(photo) {
       urlThumb: img.urls.thumb,
       likes: img.likes,
       dateAdded: actualDate.toLocaleString()
-    }))
-    setAlert(true)
-  }
+    }));
+    setAlert(true);
+    setIsLiked(true);
+  };
 
   const handleDislike = () =>{
     dispatch(removePhotoFavorite(img.id))
-  }
+    setIsLiked(false)
+  };
 
   const handleClose = (event, reason) => {
     if(reason === 'clickaway'){
       return
     }
     setAlert(false)
-  }
+  };
 
   const handleDownload = () =>{
     saveAs(img.urls.full, `${img.id}`)
-  }
+  };
 
   return (
     <CardContainer item lg={3}>
@@ -91,16 +109,15 @@ function Card(photo) {
         <CardActions sx={{justifyContent: 'end'}}>
           {isLiked
             ? <IconButton color='black' onClick={handleDislike}> 
-                <FavoriteIcon sx={{color:'red', cursor: 'pointer'}}/>
+                <Favorite sx={{color:'red', cursor: 'pointer'}}/>
               </IconButton> 
             
             : <IconButton onClick={handleLike}>
-                <FavoriteBorderIcon sx={{cursor: 'pointer'}}/>
+                <FavoriteBorder sx={{cursor: 'pointer'}}/>
               </IconButton> 
-            
           }
           <IconButton onClick={handleDownload}>
-            <CloudDownloadIcon sx={{cursor: 'pointer'}}/>
+            <CloudDownload sx={{cursor: 'pointer'}}/>
           </IconButton>
         </CardActions>
       </CardStyle>   
@@ -114,8 +131,7 @@ function Card(photo) {
         </Alert>
       </Snackbar>
     </CardContainer>
-
   )
-}
+};
 
-export default Card
+export default Card;

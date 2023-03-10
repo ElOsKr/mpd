@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getPhotos } from './callPhotosApi'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getPhotos } from './callPhotosApi';
 
 const initialState = {
     photos: [],
@@ -32,6 +32,6 @@ export const searchSlice = createSlice({
             state.hasError = true;
         }
     }
-})
+});
 
 export default searchSlice.reducer;

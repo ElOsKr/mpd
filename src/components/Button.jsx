@@ -1,6 +1,8 @@
-import React from 'react'
-import { Button as MuiButton, styled } from '@mui/material'
-
+import React from 'react';
+import { 
+        Button as MuiButton, 
+        styled } 
+from '@mui/material';
 
 const ColorButton = styled(MuiButton)(() => ({
     backgroundColor: '#222831',
@@ -15,6 +17,6 @@ function Button(props) {
         {props.name}
     </ColorButton>  
   )
-}
+};
 
-export default Button
+export default Button;

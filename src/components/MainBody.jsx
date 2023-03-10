@@ -1,4 +1,7 @@
-import { Grid, styled } from '@mui/material'
+import { 
+        Grid, 
+        styled } 
+from '@mui/material';
 
 export const MainBody = styled(Grid)(() => ({
     justifyContent: "center",

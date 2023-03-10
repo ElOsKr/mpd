@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import Input from '../components/Input'
-import { MainBody } from '../components/MainBody'
-import { Grid, Typography, styled, Pagination } from '@mui/material'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Input from '../components/Input';
+import { MainBody } from '../components/MainBody';
+import {Grid, 
+        Typography, 
+        styled, 
+        Pagination } 
+from '@mui/material';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import { useDispatch, useSelector } from 'react-redux'
-import { callApi } from '../features/search/searchSlice';
 import CardLoading from '../components/CardLoading';
-
+import { callApi } from '../features/search/searchSlice';
 
 const SearchBox = styled(Grid)(() => ({
   alignSelf: 'start'
@@ -19,68 +22,58 @@ const CardsBox = styled(Grid)(() => ({
 }));
 
 const PaginationStyled = styled(Pagination)(() => ({
-
   marginTop: '20px',
-
   '& .MuiPaginationItem-text': {
     color: 'white',
-    
     '&:hover':{
       color: 'black',
       backgroundColor: 'white'
     },
   },
-
   '& .Mui-selected': {
     color: 'black',
     backgroundColor: 'white!important'
   }
-}))
+}));
 
 
 function Search() {
 
-  const [page,setPage] = useState(1)
+  const [page,setPage] = useState(1);
 
   const [searchInput, setSearchInput] = useState('');
 
-  let photos = useSelector(state => state.searchImg.photos)
+  let photos = useSelector(state => state.searchImg.photos);
 
-  const isLoading = useSelector(state => state.searchImg.isLoading)
+  const isLoading = useSelector(state => state.searchImg.isLoading);
 
   const dispatch = useDispatch();
 
-  let cardsLoading = [];
-
-  cardsLoading.forEach((index) => {
-    cardsLoading.push(<CardLoading key={index}/>)
-  })
-
   useEffect(()=>{
-    dispatch(callApi(searchInput,page))
-  },[])
+    dispatch(callApi(searchInput,page));
+  },[]);
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    setPage(1)
-    dispatch(callApi(searchInput,page))
-    setSearchInput('')
+    setPage(1);
+    dispatch(callApi(searchInput,page));
+    setSearchInput('');
   }
 
   const handleClickSearch = () => {
-    setPage(1)
-    dispatch(callApi(searchInput,page))
-    setSearchInput('')
+    setPage(1);
+    dispatch(callApi(searchInput,page));
+    setSearchInput('');
   }
 
   const handleChangeInput = (event) =>{
-    setSearchInput(event.target.value)
+    setSearchInput(event.target.value);
   }
 
   const handleChangePage = (event , value) => {
-    setPage(value)
-    dispatch(callApi(searchInput,value))
-    window.scrollTo({top: 0})
+    setPage(value);
+    dispatch(callApi(searchInput,value));
+    window.scrollTo({top: 0});
   }
 
   return (
@@ -105,7 +98,7 @@ function Search() {
       </CardsBox>
       <PaginationStyled count={10} page={page} shape="rounded" size="small" onChange={handleChangePage}/>
     </MainBody>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

@@ -1,7 +1,14 @@
-import React from 'react'
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import React from 'react';
+import { 
+        AppBar, 
+        Toolbar, 
+        Typography, 
+        Box } 
+from '@mui/material';
+import {
+        LinkedIn, 
+        GitHub } 
+from '@mui/icons-material';
 
 function Footer() {
   return (
@@ -36,18 +43,17 @@ function Footer() {
                         justifyContent: 'space-evenly'
                     }}>
                         <a href="https://www.linkedin.com/in/oscar-alcivar-177aa3229/" target="_blank" rel="noreferrer" className='footer__link'>
-                            <LinkedInIcon />
+                            <LinkedIn />
                         </a>
                         <a href="https://github.com/ElOsKr" target="_blank" rel="noreferrer" className='footer__link'>
-                           <GitHubIcon />  
+                           <GitHub />  
                         </a>                      
                     </Box>
                 </Box>
             </Toolbar>
         </AppBar>        
     </Box>
-
   )
-}
+};
 
-export default Footer
+export default Footer;
