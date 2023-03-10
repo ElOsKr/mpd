@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, Card as CardMui, styled, Grid, IconButton, Snackbar, Alert, Icon } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -27,11 +27,18 @@ function Card(photo) {
 
   const [alert, setAlert] = useState(false)
 
+  const [isLiked, setIsLiked] = useState(false);
+
   let favoriteImages = useSelector((state) => state.favPhotos.favList)
 
   let img = photo.photo;
 
-  const isLiked = favoriteImages.some(imgSave => imgSave.id === img.id)
+  useEffect(()=>{
+    if(favoriteImages!==null){
+      setIsLiked(favoriteImages.some(imgSave => imgSave.id === img.id))
+    }    
+  },[])
+
 
   const dispatch = useDispatch();
 
@@ -51,10 +58,12 @@ function Card(photo) {
       dateAdded: actualDate.toLocaleString()
     }))
     setAlert(true)
+    setIsLiked(true)
   }
 
   const handleDislike = () =>{
     dispatch(removePhotoFavorite(img.id))
+    setIsLiked(false)
   }
 
   const handleClose = (event, reason) => {

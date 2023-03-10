@@ -13,13 +13,17 @@ export const favoritesSlices = createSlice({
     initialState,
     reducers: {
         addPhotoFavorites: (state,action) => {
-            if([...state.favList].some(photo => photo.id === action.payload.id)){
-                state.favList = [...state.favList]
+            if(state.favList === null){
+                setInLocalStorage(action.payload)
             }else{
-                state.favList = [...state.favList, action.payload]
-            }
+                if([...state.favList].some(photo => photo.id === action.payload.id)){
+                    state.favList = [...state.favList]
+                }else{
+                    state.favList = [...state.favList, action.payload]
+                }
 
-            setInLocalStorage(state.favList)
+                setInLocalStorage(state.favList)                
+            }
         },
 
         removePhotoFavorite: (state,action) => {
