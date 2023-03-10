@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
 import { Grid, Typography, styled, Pagination } from '@mui/material'
@@ -40,8 +40,6 @@ const PaginationStyled = styled(Pagination)(() => ({
 
 function Search() {
 
-  const focus = useRef(null)
-
   const [page,setPage] = useState(1)
 
   const [searchInput, setSearchInput] = useState('');
@@ -67,7 +65,6 @@ function Search() {
     setPage(1)
     dispatch(callApi(searchInput,page))
     setSearchInput('')
-    focus.current.blur();
   }
 
   const handleClickSearch = () => {
@@ -91,7 +88,7 @@ function Search() {
       <SearchBox item xs={12}>
           <Typography variant="h5" sx={{mb: '20px'}}>Search</Typography>
         <form onSubmit={handleSubmit}>
-          <Input onChange={handleChangeInput} ref={focus} value={searchInput}/>
+          <Input onChange={handleChangeInput} value={searchInput}/>
           <Button name="Search" onClick={handleClickSearch}/>          
         </form>
       </SearchBox>
