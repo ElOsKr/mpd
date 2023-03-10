@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Input from '../components/Input'
 import { MainBody } from '../components/MainBody'
-import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl, Box } from '@mui/material'
 import CardFavorites from '../components/CardsFavorites';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterFavoritesDescription, orderPhotosBy } from '../features/favorites/favoritesSlice';
+import { Link } from 'react-router-dom';
 
 const SearchBox = styled(Grid)(() => ({
   alignSelf: 'start'
@@ -89,7 +90,20 @@ function Favorites() {
           </FormControl>
       </SearchBox>
       <CardsBox container item xs={12} spacing={4}> 
-        {photos.map((photo) => (
+        {photos===null || photos.lenght === 0?
+          <Box>
+            <Typography variant="h5" sx={{mt: '50px'}}>
+              No photos in favorites
+            </Typography>   
+            <Typography variant="h5" sx={{mt: '50px'}}>
+              Go to <Link 
+              to='/search'
+              style={{color: 'white'}}
+              >Search</Link>
+            </Typography>         
+          </Box>
+          :
+          photos.map((photo) => (
             <CardFavorites photo={photo} key={photo.id} valueInput={valueInput}/>
         ))}
       </CardsBox>

@@ -83,7 +83,7 @@ function Card(photo) {
           </Typography>
           <UserBox container>
             <Avatar src={`${img.user.profile_image.small}`}/>
-            <Typography variant='overline' sx={{alignSelf: 'center', marginLeft: '20px'}}>
+            <Typography variant='overline' noWrap sx={{alignSelf: 'center', marginLeft: '20px', maxWidth: '70%'}}>
                 {img.user.name}
             </Typography>        
           </UserBox>
