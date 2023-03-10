@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Box, styled } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import { NavLink } from 'react-router-dom';
+import {AppBar, 
+        Toolbar, 
+        Typography, 
+        Box, 
+        styled } 
+from '@mui/material';
+import {Menu,
+        Close } 
+from '@mui/icons-material';
 
 const pages = [
   {name: 'Home', url: '/'},
@@ -30,10 +36,10 @@ const MobileMenu = styled(Toolbar)(() => ({
 function Navbar() {
 
   const [visible, setVisible] = useState('none');
+
   const [menu, setMenu] = useState("flex")
 
   const handleOpenMenu = () => {
-    
     if(visible==="none"){
       setVisible("flex")
       setMenu("none")
@@ -54,14 +60,14 @@ function Navbar() {
         <Box>
           <Typography>MPD</Typography>
         </Box>
-          <MenuIcon
+          <Menu
             sx={{
               cursor: 'pointer',
               display: {xs: menu, sm: 'none'},
             }}
             onClick={handleOpenMenu}
           /> 
-          <CloseIcon 
+          <Close
             sx={{
               cursor: 'pointer',
               display: {xs: visible, sm: 'none'},
@@ -101,5 +107,6 @@ function Navbar() {
       </MobileMenu>
     </AppBar>
   );
-}
+};
+
 export default Navbar;

@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import Input from '../components/Input'
-import { MainBody } from '../components/MainBody'
-import { Grid, Typography, styled, Select, MenuItem, InputLabel, FormControl, Box } from '@mui/material'
-import CardFavorites from '../components/CardsFavorites';
-import { useDispatch, useSelector } from 'react-redux';
-import { filterFavoritesDescription, orderPhotosBy } from '../features/favorites/favoritesSlice';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {Grid, 
+        Typography, 
+        styled, 
+        Select, 
+        MenuItem, 
+        InputLabel, 
+        FormControl, 
+        Box } 
+from '@mui/material';
+import Input from '../components/Input';
+import { MainBody } from '../components/MainBody';
+import CardFavorites from '../components/CardsFavorites';
+import { filterFavoritesDescription, orderPhotosBy } from '../features/favorites/favoritesSlice';
 
 const SearchBox = styled(Grid)(() => ({
   alignSelf: 'start'
@@ -17,57 +25,50 @@ const CardsBox = styled(Grid)(() => ({
 }));
 
 const SelectStyle = styled(Select)(() => ({
-
   color: 'white',
-
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
     borderColor: 'white'
   },
-
   '&:hover .MuiOutlinedInput-notchedOutline': {
     borderColor: 'white'
   },
-
   '& .MuiSvgIcon-root': {
     color: 'white'
-}
-}))
+  }
+}));
 
 const LabelStyle = styled(InputLabel)(() => ({
-
   color: 'white',
-
   '&.Mui-focused': {
     color: 'white'
   },
-}))
+}));
 
 function Favorites() {
 
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
-  const [valueInput, setValueInput] = useState('')
+  const [valueInput, setValueInput] = useState('');
 
   const dispatch = useDispatch();
 
-  let photos = useSelector(state => state.favPhotos.favList)
-
+  let photos = useSelector(state => state.favPhotos.favList);
 
   useEffect(()=>{
-    dispatch(orderPhotosBy(value))
-  },[value])
+    dispatch(orderPhotosBy(value));
+  },[value]);
 
   const handleChange = (event) => {
-    setValue(event.target.value)
-  }
+    setValue(event.target.value);
+  };
 
   const handleFilter = (event) => {
-    setValueInput(event.target.value)
+    setValueInput(event.target.value);
     dispatch(filterFavoritesDescription(event.target.value));
     if(event.target.value===""){
-      setValue('')
+      setValue('');
     }
-  }
+  };
 
   return (
     <MainBody container spacing={2}>
@@ -108,7 +109,7 @@ function Favorites() {
         ))}
       </CardsBox>
     </MainBody>
-  )
-}
+  );
+};
 
-export default Favorites
+export default Favorites;

@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
-import { Grid, Typography, styled, CircularProgress, Skeleton } from '@mui/material'
-import Carousel from '../components/Carousel'
-import Button from '../components/Button'
-import { useNavigate } from 'react-router-dom'
-import { MainBody } from '../components/MainBody'
-import { useDispatch, useSelector } from 'react-redux'
-import { carouselCall } from '../features/carousel/carouselSlice'
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {Grid, 
+        Typography, 
+        styled, 
+        Skeleton } 
+from '@mui/material';
+import Carousel from '../components/Carousel';
+import Button from '../components/Button';
+import { MainBody } from '../components/MainBody';
+import { carouselCall } from '../features/carousel/carouselSlice';
 
 const Description = styled(Grid)(() => ({
   margin: 'auto 0'
@@ -34,19 +37,19 @@ function Home() {
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-      dispatch(carouselCall())
-  }, [])
-
   const navigate = useNavigate();
 
   const changeToSearch = () =>{
-    navigate('/search')
-  }
+    navigate('/search');
+  };
 
   const changeToFavorites = () =>{
-    navigate('/favorites')
-  }
+    navigate('/favorites');
+  };
+
+  useEffect(()=>{
+    dispatch(carouselCall());
+  }, []);
 
   return (
     <MainBody container spacing={2} sx={{
@@ -79,7 +82,7 @@ function Home() {
         }
       </CarouselContainer>
     </MainBody>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

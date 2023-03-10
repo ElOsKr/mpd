@@ -13,7 +13,6 @@ export const getPhotos = async (query,page) => {
             return [...data.results];
         }
     }catch(err){
-        alert(`Error while procesing data from api ${err}`)
-    }
-
-}
+        alert(`Error while procesing data from api ${err}`);
+    };
+};

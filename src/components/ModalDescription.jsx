@@ -1,6 +1,18 @@
-import { Modal, Box, Typography, Card as CardMui, styled, CardContent, CardMedia, TextField, Button, CardActions, Snackbar, Alert } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import {Modal, 
+        Box, 
+        Typography, 
+        Card as CardMui, 
+        styled, 
+        CardContent, 
+        CardMedia, 
+        TextField, 
+        Button, 
+        CardActions, 
+        Snackbar, 
+        Alert } 
+from '@mui/material';
 import { editPhotoDescription } from '../features/favorites/favoritesSlice';
 
 const CardStyle = styled(CardMui)(() => ({
@@ -27,31 +39,31 @@ const style = {
 
 function ModalDescription({id, open,img,description,handleClose}) {
 
-    const [newDescription, setNewDescription] = useState('')
+  const [newDescription, setNewDescription] = useState('')
 
-    const [alert, setAlert] = useState(false)
+  const [alert, setAlert] = useState(false)
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const saveDescription = () => {
-      if(newDescription===""){
-        setAlert(true)
-      }else{
-          dispatch(editPhotoDescription({id , newDescription}));
-          handleClose()        
-      }
+  const saveDescription = () => {
+    if(newDescription===""){
+      setAlert(true)
+    }else{
+      dispatch(editPhotoDescription({id , newDescription}));
+      handleClose()        
     }
+  }
 
-    const handleChangeDescription = (event) => {
-        setNewDescription(event.target.value)
-    }  
+  const handleChangeDescription = (event) => {
+    setNewDescription(event.target.value)
+  }  
     
-    const handleCloseAlert = (event, reason) => {
-      if(reason === 'clickaway'){
-        return
-      }
-      setAlert(false)
+  const handleCloseAlert = (event, reason) => {
+    if(reason === 'clickaway'){
+      return
     }
+    setAlert(false)
+  }
 
   return (
     <div>
@@ -107,6 +119,6 @@ function ModalDescription({id, open,img,description,handleClose}) {
       </Snackbar>
     </div>
   )
-}
+};
 
-export default ModalDescription
+export default ModalDescription;

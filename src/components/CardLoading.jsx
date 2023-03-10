@@ -1,10 +1,19 @@
 import React from 'react'
-import { Card as CardMui, styled, Grid, IconButton, Skeleton, CardMedia } from '@mui/material';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import { 
+        Card as CardMui, 
+        styled, 
+        Grid, 
+        IconButton, 
+        Skeleton, 
+        CardMedia,
+        CardActions,
+        CardContent,
+        Typography } 
+from '@mui/material';
+import {
+        FavoriteBorder,
+        CloudDownload } 
+from '@mui/icons-material';
 
 const UserBox = styled(Grid)(() => ({
     justifyContent: 'center'
@@ -42,15 +51,15 @@ function CardLoading() {
       </CardContent>
       <CardActions sx={{justifyContent: 'end'}}>
             <IconButton>
-              <FavoriteBorderIcon/>
+              <FavoriteBorder/>
             </IconButton> 
         <IconButton>
-          <CloudDownloadIcon/>
+          <CloudDownload/>
         </IconButton>
       </CardActions>
     </CardStyle>   
   </CardContainer>
   )
-}
+};
 
-export default CardLoading
+export default CardLoading;

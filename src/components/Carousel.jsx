@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
-import { Box, styled } from '@mui/material'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/effect-fade'
-import 'swiper/css/autoplay'
-import { EffectFade, Autoplay } from 'swiper'
-import '../styles/index.css'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { 
+        Box, 
+        styled } 
+from '@mui/material';
+import { 
+        Swiper, 
+        SwiperSlide } 
+from 'swiper/react';
+import { 
+        EffectFade, 
+        Autoplay } 
+from 'swiper';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/autoplay';
+import '../styles/index.css';
 
 const CarouselBox = styled(Box)(() => ({
     width: '70%',
@@ -16,7 +25,7 @@ const CarouselBox = styled(Box)(() => ({
 
 function Carousel() {
 
-    let photos =  useSelector(state => state.carouselPhotos.photos)
+    let photos =  useSelector(state => state.carouselPhotos.photos);
 
   return (
     <CarouselBox>
@@ -39,6 +48,6 @@ function Carousel() {
         </Swiper>
     </CarouselBox>
   )
-}
+};
 
-export default Carousel
+export default Carousel;

@@ -1,23 +1,21 @@
-import React from 'react'
-import { TextField, styled } from '@mui/material'
+import React from 'react';
+import { 
+        TextField, 
+        styled } 
+from '@mui/material'
 
-const InputText = styled(TextField)({
-  
+const InputText = styled(TextField)({  
   marginRight: '20px',
-
   input:{
     color: 'white',
     backgroundColor: 'none'
   },
-
   '& label':{
     color: 'white'
   },
-
   '& label.Mui-focused': {
     color: 'white',
   },
-
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: 'white',
@@ -31,9 +29,7 @@ const InputText = styled(TextField)({
   },
 });
 
-
 function Input(props) {
-
   return (
     <InputText 
       label="Search"
@@ -44,6 +40,6 @@ function Input(props) {
       value={props.value}
     />
   )
-}
+};
 
-export default Input
+export default Input;

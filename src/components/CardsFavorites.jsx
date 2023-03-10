@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
-import { Card as CardMui, styled, Grid, IconButton, Box, Button } from '@mui/material';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { 
+        Card as CardMui, 
+        styled, 
+        Grid, 
+        IconButton, 
+        Box, 
+        Button,
+        CardActions,
+        CardContent,
+        CardMedia,
+        Typography } 
+from '@mui/material';
+import {
+        Favorite,
+        CloudDownload,
+        Delete } 
+from '@mui/icons-material';
 import { filterFavoritesDescription, removePhotoFavorite } from '../features/favorites/favoritesSlice';
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 import ModalDescription from './ModalDescription';
-
 
 const ColorButton = styled(Button)(() => ({
   backgroundColor: '#0E8388',
@@ -36,29 +44,28 @@ function CardFavorites(props) {
 
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const openModal = () =>{
     setOpen(true)
-  }
+  };
 
   let img = props.photo;
 
   let filterDescription = props.valueInput;
 
-  const dispatch = useDispatch()
-
   const handleRemove = () => {
     dispatch(removePhotoFavorite(img.id))
     dispatch(filterFavoritesDescription(filterDescription))
-
-  }
+  };
 
   const handleDownload = () =>{
     saveAs(img.urlFull, `${img.id}`)
-  }
+  };
 
   const handleClose = () =>{
     setOpen(false)
-  }
+  };
 
   return (
     <CardContainer item lg={3}>
@@ -81,7 +88,7 @@ function CardFavorites(props) {
             </Typography>
             <Typography variant="Caption" sx={{display: 'flex', justifyContent:'center'}}>
                 {`Likes: ${img.likes} `}
-                <FavoriteIcon sx={{color:'red'}}/>
+                <Favorite sx={{color:'red'}}/>
             </Typography>
             {img.description?
               <Typography variant="Caption" sx={{textAlign: 'start', overflow:"hidden" , textOverflow:"ellipsis", maxWidth: '268px'}}>
@@ -91,8 +98,7 @@ function CardFavorites(props) {
               <Typography variant="Overline" sx={{textAlign: 'start', color: 'grey'}}>
                 No description available
               </Typography>        
-            }
-                       
+            }           
         </CardContent>
         <CardActions sx={{justifyContent: 'space-between'}}>
             <ColorButton variant='contained' onClick={openModal}>
@@ -100,10 +106,10 @@ function CardFavorites(props) {
             </ColorButton>
             <Box>
               <IconButton onClick={handleRemove}>
-                <DeleteIcon sx={{cursor: 'pointer'}}/>
+                <Delete sx={{cursor: 'pointer'}}/>
               </IconButton> 
               <IconButton onClick={handleDownload}>
-                <CloudDownloadIcon sx={{cursor: 'pointer'}}/>
+                <CloudDownload sx={{cursor: 'pointer'}}/>
               </IconButton>              
             </Box>
         </CardActions>
@@ -111,6 +117,6 @@ function CardFavorites(props) {
       <ModalDescription id={img.id} open={open} img={img.urlSmall} description={img.description} handleClose={handleClose}/>  
     </CardContainer>
   )
-}
+};
 
-export default CardFavorites
+export default CardFavorites;

@@ -6,7 +6,6 @@ export const getPhotosCarousel = async () => {
         const data = await response.json();
         return [...data];
     }catch(err){
-        alert(`Error while procesing data from api ${err}`)
-    }
-
-}
+        alert(`Error while procesing data from api ${err}`);
+    };
+};
