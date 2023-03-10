@@ -90,7 +90,7 @@ function Favorites() {
           </FormControl>
       </SearchBox>
       <CardsBox container item xs={12} spacing={4}> 
-        {photos.length===0?
+        {photos===null || photos.lenght === 0?
           <Box>
             <Typography variant="h5" sx={{mt: '50px'}}>
               No photos in favorites
