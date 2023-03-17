@@ -44,7 +44,7 @@ function Card(photo) {
   let favoriteImages = useSelector((state) => state.favPhotos.favList);
 
   useEffect(()=>{
-    if(favoriteImages!==null){
+    if(favoriteImages){
       setIsLiked(favoriteImages.some(imgSave => imgSave.id === img.id));
     }    
   },[]);
