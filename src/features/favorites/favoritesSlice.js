@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const setInLocalStorage = (photos) => {
-    localStorage.setItem('favList', JSON.stringify(photos));
+    localStorage.setItem('favList', [JSON.stringify(photos)]);
 };
 
 export const favoritesSlices = createSlice({
@@ -13,7 +13,7 @@ export const favoritesSlices = createSlice({
     initialState,
     reducers: {
         addPhotoFavorites: (state,action) => {
-            if(state.favList === null){
+            if(!state.favList){
                 setInLocalStorage(action.payload);
             }else{
                 if([...state.favList].some(photo => photo.id === action.payload.id)){
