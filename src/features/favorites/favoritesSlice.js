@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const setInLocalStorage = (photos) => {
-    localStorage.setItem('favList', [JSON.stringify(photos)]);
+    localStorage.setItem('favList', JSON.stringify(photos));
 };
 
 export const favoritesSlices = createSlice({
