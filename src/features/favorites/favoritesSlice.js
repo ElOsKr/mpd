@@ -61,7 +61,7 @@ export const favoritesSlices = createSlice({
                     state.favList = state.favList.sort((a, b) => b.likes - a.likes);
                     break;
                 default:
-                    state.favList = JSON.parse(localStorage.getItem('favList'));
+                    state.favList = JSON.parse(localStorage.getItem('favList')) || [];
                     break;
             };
         }
