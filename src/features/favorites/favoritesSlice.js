@@ -13,7 +13,7 @@ export const favoritesSlices = createSlice({
     initialState,
     reducers: {
         addPhotoFavorites: (state,action) => {
-            if(state.favList === null){
+            if(!state.favList){
                 setInLocalStorage(action.payload);
             }else{
                 if([...state.favList].some(photo => photo.id === action.payload.id)){
@@ -61,7 +61,7 @@ export const favoritesSlices = createSlice({
                     state.favList = state.favList.sort((a, b) => b.likes - a.likes);
                     break;
                 default:
-                    state.favList = JSON.parse(localStorage.getItem('favList'));
+                    state.favList = JSON.parse(localStorage.getItem('favList')) || [];
                     break;
             };
         }
