@@ -58,7 +58,7 @@ function Navbar() {
           flexWrap: {xs: 'wrap', sm: 'nowrap'}
       }}>
         <Box>
-          <Typography>Yo</Typography>
+          <Typography>MPD</Typography>
         </Box>
           <Menu
             sx={{
