@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {AppBar, 
         Toolbar, 
-        Typography, 
         Box, 
         styled } 
 from '@mui/material';
 import {Menu,
         Close } 
 from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png'
 
 const pages = [
   {name: 'Home', url: '/'},
@@ -58,7 +59,12 @@ function Navbar() {
           flexWrap: {xs: 'wrap', sm: 'nowrap'}
       }}>
         <Box>
-          <Typography>MPD</Typography>
+          <Link to='/'>
+            <img src={logo} alt="mpdLogo" 
+            width={50}
+            height={50}
+            />
+          </Link>
         </Box>
           <Menu
             sx={{
